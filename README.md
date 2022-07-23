@@ -15,3 +15,6 @@
 - 添加两个新的停止灾难的条件
 
 - 添加和修改数个影响灾难进程的修正
+
+
+![thumbnail](https://github.com/SirMegaMU/Disaster-EclipseOfEmpires-CN/blob/main/thumbnail.png?raw=true)
