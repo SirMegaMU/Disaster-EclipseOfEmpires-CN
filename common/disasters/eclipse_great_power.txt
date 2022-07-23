@@ -1,0 +1,162 @@
+eclipse_great_powerd = {
+	potential = {
+		# NOT = { has_country_flag = had_eclipse_great_power }
+		total_development = 250
+	}
+
+	can_start = {
+		has_any_disaster = no
+		OR = {
+			is_great_power = yes
+			government_rank = 3
+		}
+		in_golden_age = no
+		custom_trigger_tooltip = {
+			tooltip = been_greatpower_twenty_years_tooltip
+			OR = {
+				had_country_flag = {
+					flag = eclipse_countdown
+					days = 18250
+					
+				}
+				had_country_flag = {
+					flag = eclipse_next_time
+					days = 73000				
+				}
+			}
+		}
+		custom_trigger_tooltip = {
+			tooltip = noone_else_in_darkage_tooltip
+			all_countries_including_self = {
+				NOT = { has_disaster = eclipse_great_powerd }
+			}
+		}
+	}
+	
+	can_stop = {
+		OR = {
+			has_any_disaster = yes
+			is_great_power = no
+			in_golden_age = yes
+			AND = {
+				is_emperor_of_china = yes
+				imperial_mandate = 100
+			}
+			custom_trigger_tooltip = {
+				tooltip = good_ruler
+				THIS = {
+					adm = 6
+					dip = 6
+					mil = 6
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = someone_else_in_darkage_tooltip
+				any_country = {
+					has_disaster = eclipse_great_powerd
+				}
+			}
+		}
+	}
+		
+	progress = {
+		modifier = {
+			factor = 1
+			is_great_power = yes
+		}
+		modifier = {
+			factor = 1
+			government_rank = 3
+		}
+		modifier = {
+			factor = 1
+			total_development = 500
+		}
+		modifier = {
+			factor = 1
+			colony = 3
+		}
+		modifier = {
+			factor = 2
+			NOT = { any_other_great_power = { army_size = root } }
+		}
+		modifier = {
+			factor = 2
+			NOT = { any_other_great_power = { monthly_income = root } }
+		}
+		modifier = {
+			factor = 5
+			custom_trigger_tooltip = {
+				tooltip = eclipse_strongest_power_tooltip
+				is_great_power = yes
+				NOT = { great_power_rank = 2 }
+			}
+		}
+		modifier = {
+			factor = -0.5
+			NOT = { unrest = -5 }
+		}
+		modifier = {
+			factor = -1
+			stability = 3 
+		}
+		modifier = {
+			factor = -1
+			custom_trigger_tooltip = {
+				tooltip = mandate_emperor
+				AND = {
+					is_emperor_of_china = yes
+					imperial_mandate = 80 
+				}
+			}
+		}
+	}
+	
+	can_end = {
+		OR = {
+			custom_trigger_tooltip = {
+				tooltip = eclipse_active_for_20_years_tooltip
+				had_country_flag = {
+					flag = had_eclipse_great_power
+					days = 7300
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = eclipse_active_for_10nopower_years_tooltip
+				is_great_power = no
+				had_country_flag = {
+					flag = had_eclipse_great_power
+					days = 3650
+				}
+			}
+		}
+	}
+	
+	modifier = {
+		global_unrest = 20
+		governing_capacity_modifier = -0.4
+		min_autonomy = 40
+	}	
+	
+	on_start = eclipse_great_power.1
+	on_end = eclipse_great_power.100
+	
+	on_monthly = {
+		random_events = { 
+			1000 = 0
+			100 = eclipse_great_power.2
+			100 = eclipse_great_power.3
+			100 = eclipse_great_power.5
+			100 = eclipse_great_power.6
+			100 = eclipse_great_power.7
+			100 = eclipse_great_power.8
+			100 = eclipse_great_power.9
+			100 = eclipse_great_power.10
+			100 = eclipse_great_power.14
+			100 = eclipse_great_power.15
+			100 = eclipse_great_power.16
+			100 = eclipse_great_power.17
+			100 = eclipse_great_power.18
+		}
+	}
+}

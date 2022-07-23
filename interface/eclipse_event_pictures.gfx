@@ -1,0 +1,8 @@
+	### I really need a girlfriend ###	
+	
+spriteTypes = {	
+	spriteType = {
+		name = "PICTUREECLIPSE"
+		texturefile = "gfx//event_pictures//PICTUREECLIPSE.dds"
+	}
+}

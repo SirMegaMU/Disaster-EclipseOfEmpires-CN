@@ -1,0 +1,1233 @@
+namespace = eclipse_great_power
+
+country_event = {
+	id = eclipse_great_power.1
+	
+	title = "eclipse_great_power.EVTNAME1"			#start
+	desc = "eclipse_great_power.EVTDESC1"
+	
+	picture = PICTUREECLIPSE
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+	immediate = {
+		hidden_effect = {
+			set_country_flag = had_eclipse_great_power
+			if = {
+				limit = {
+					any_owned_province = {
+						has_owner_accepted_culture = no
+						has_owner_culture = no
+					}
+				}
+				every_owned_province = {
+					limit = {
+						has_owner_accepted_culture = no
+						has_owner_culture = no
+					}
+					add_province_modifier = {
+						name = "prov_eclipse_cultural"
+						duration = 7300
+					}
+				}
+			}
+			if = {
+				limit = {
+					any_owned_province = {
+						NOT = { religion = ROOT }
+					}
+				}
+				every_owned_province = {
+					limit = {
+						NOT = { religion = ROOT }
+					}
+					add_province_modifier = {
+						name = "prov_eclipse_religious"
+						duration = 7300
+					}
+				}
+			}
+			if = {
+				limit = {
+					any_owned_province = {
+						development = 20
+					}
+				}
+				every_owned_province = {
+					limit = {
+						development = 20
+					}
+					add_province_modifier = {
+						name = "prov_eclipse_production"
+						duration = 7300
+					}
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = "eclipse_great_power.EVTOPTA1"			#we will endure...
+		trigger = {
+			ai = no
+		}
+		custom_tooltip = eclipse_warning_tt
+		hidden_effect = {
+			add_stability = -6
+			add_prestige = -50
+		}
+	}
+	option = {
+		name = "eclipse_great_power.EVTOPTB1"			#COUNTRYNAME is no more...
+		trigger = {
+			ai = yes
+		}
+		hidden_effect = {
+			add_stability = -6
+			add_prestige = -50
+			every_owned_province = {
+				limit = { has_owner_culture = no }
+				add_nationalism = 10
+			}
+			if = {
+				limit = { luck = yes }
+				add_country_modifier = {
+					name = eclipse_luckynotsolucky
+					duration = 7300
+					hidden = yes	
+				}
+			}
+		}
+	}
+}
+country_event = {
+	id = eclipse_great_power.11
+	
+	title = "eclipse_great_power.EVTNAME11"					#invisible - set the countdown
+	desc = "eclipse_great_power.EVTDESC11"
+	
+	picture = PICTUREECLIPSE
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+	hidden = yes		#debug
+	
+	trigger = {
+		OR = {
+			is_great_power = yes
+			government_rank = 3
+		}
+		# NOT = { has_country_flag = had_eclipse_great_power }
+		NOT = { has_country_flag = eclipse_countdown }
+		NOT = { has_country_flag = eclipse_next_time }
+	}
+	
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = { has_country_flag = had_eclipse_great_power }
+				set_country_flag = eclipse_next_time
+			}
+			if = {
+				limit = { NOT = { has_country_flag = had_eclipse_great_power } }
+				set_country_flag = eclipse_countdown
+			}
+		}
+	}
+	
+	option = {
+		name = "eclipse_great_power.EVTOPTA11"
+	}
+}
+country_event = {
+	id = eclipse_great_power.12
+	
+	title = "eclipse_great_power.EVTNAME12"					#invisible - clear countdown
+	desc = "eclipse_great_power.EVTDESC12"
+	
+	picture = PICTUREECLIPSE
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+	hidden = yes		#debug
+	
+	trigger = {
+		AND = {
+			is_great_power = no
+			NOT = { government_rank = 3 }
+		}
+		NOT = { has_country_flag = had_eclipse_great_power }
+		OR = {
+			has_country_flag = eclipse_countdown
+			had_country_flag = eclipse_next_time
+		}
+	}
+	
+	immediate = {
+		hidden_effect = {
+			clr_country_flag = eclipse_countdown
+			clr_country_flag = eclipse_next_time
+		}
+	}
+	
+	option = {
+		name = "eclipse_great_power.EVTOPTA12"
+	}
+}
+country_event = {
+	id = eclipse_great_power.100
+	
+	title = "eclipse_great_power.EVTNAME100"			#end
+	desc = "eclipse_great_power.EVTDESC100"
+	
+	picture = PICTUREECLIPSE
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+	immediate = {
+		remove_country_modifier = cooldown_eclipse_dismorale
+		remove_country_modifier = cooldown_eclipse_deserters
+		remove_country_modifier = cooldown_eclipse_leadersexecuted
+		remove_country_modifier = eclipse_spy_hunts
+		remove_country_modifier = eclipse_spies_rampart
+		remove_country_modifier = eclipse_failed_state
+		remove_country_modifier = eclipse_subject_loyalty
+		remove_country_modifier = eclipse_maintaining_of_world_stage
+		remove_country_modifier = eclipse_islamic_extremism
+		every_owned_province = {
+			remove_province_modifier = prov_eclipse_religious
+			remove_province_modifier = prov_eclipse_cultural
+			remove_province_modifier = prov_eclipse_production
+			remove_province_modifier = prov_eclipse_extremist_stronghold
+		}
+	}
+	
+	option = {
+		name = "eclipse_great_power.EVTOPTA100"				#eclipse
+		trigger = {
+			is_great_power = no
+		}
+	}
+	option = {
+		name = "eclipse_great_power.EVTOPTB100"				#endure
+		trigger = {
+			is_great_power = yes
+		}
+	}
+}
+country_event = {
+	id = eclipse_great_power.2
+	
+	title = "eclipse_great_power.EVTNAME2"				#religious conflict
+	desc = "eclipse_great_power.EVTDESC2"
+	
+	picture = PICTUREECLIPSE
+	
+	trigger = {
+		any_owned_province = {
+			has_province_modifier = prov_eclipse_religious
+			NOT = { religion = ROOT }
+		}
+		NOT = { has_country_modifier = cooldown_eclipse_religious }
+	}
+	
+	is_triggered_only = yes
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+	immediate = {
+		random_owned_province = {
+			limit = { has_province_modifier = prov_eclipse_religious }
+			spawn_rebels = {
+				size = 1
+				leader = noble_zealot
+				type = religious_rebels
+			}
+		}
+		hidden_effect = {
+			add_country_modifier = {
+				name = cooldown_eclipse_religious
+				duration = 1825
+				hidden = yes	
+			}
+			random_owned_province = {
+				limit = {
+					has_province_modifier = prov_eclipse_religious
+				}
+				save_event_target_as = eclipse_religious_province
+			}
+			if = {
+				limit = { ai = yes }
+				every_owned_province = {
+					limit = { has_province_modifier = recent_uprising }
+					remove_province_modifier = recent_uprising
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = "eclipse_great_power.EVTOPTA2"			#Clergy is upset
+		ai_chance = { factor = 5 }
+		add_adm_power = -50
+		add_estate_loyalty = {
+			estate = estate_church
+			loyalty = -15
+		}
+	}
+	option = {
+		name = "eclipse_great_power.EVTOPTB2"			#minority is upset
+		ai_chance = { factor = 5 }
+		add_mil_power = -50
+		random_owned_province = {
+			limit = { has_province_modifier = prov_eclipse_religious }
+			spawn_rebels = {
+				size = 1
+				leader = noble_zealot
+				type = religious_rebels
+			}
+		}
+	}
+	option = {
+		name = "eclipse_great_power.EVTOPTC2"			#i profoundly do not care
+		ai_chance = { factor = 90 }
+		add_estate_loyalty = {
+			estate = estate_church
+			loyalty = -20
+		}
+		random_owned_province = {
+			limit = { has_province_modifier = prov_eclipse_religious }
+			spawn_rebels = {
+				size = 2
+				leader = noble_zealot
+				type = religious_rebels
+			}
+		}
+	}
+}
+country_event = {
+	id = eclipse_great_power.3
+	
+	title = "eclipse_great_power.EVTNAME3"				#cultural conflict
+	desc = "eclipse_great_power.EVTDESC3"
+	
+	picture = PICTUREECLIPSE
+	
+	trigger = {
+		any_owned_province = {
+			has_province_modifier = prov_eclipse_cultural
+			NOT = { culture = ROOT }
+		}
+		NOT = { has_country_modifier = cooldown_eclipse_cultural }
+	}
+	
+	is_triggered_only = yes
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+	immediate = {
+		random_owned_province = {
+			limit = { has_province_modifier = prov_eclipse_cultural }
+			spawn_rebels = {
+				size = 1
+				type = particularist_rebels
+			}
+		}
+		hidden_effect = {
+			add_country_modifier = {
+				name = cooldown_eclipse_cultural
+				duration = 1825
+				hidden = yes	
+			}
+			random_owned_province = {
+				limit = {
+					has_province_modifier = prov_eclipse_cultural
+				}
+				save_event_target_as = eclipse_cultural_province
+			}
+			if = {
+				limit = { ai = yes }
+				every_owned_province = {
+					limit = { has_province_modifier = recent_uprising }
+					remove_province_modifier = recent_uprising
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = "eclipse_great_power.EVTOPTA3"
+		add_prestige = -15
+		event_target:eclipse_cultural_province = {
+			add_local_autonomy = 20
+		}
+	}
+	option = {
+		name = "eclipse_great_power.EVTOPTB3"
+		add_stability = -1
+		event_target:eclipse_cultural_province = {
+			spawn_rebels = {
+				size = 2
+				type = particularist_rebels
+			}
+		}
+	}
+}
+country_event = {
+	id = eclipse_great_power.4
+	
+	title = "eclipse_great_power.EVTNAME4"				#the conspiracy
+	desc = "eclipse_great_power.EVTDESC4"
+	
+	picture = PICTUREECLIPSE
+	
+	trigger = {
+		NOT = { has_country_modifier = cooldown_eclipse_conspiracy }
+	}
+	
+	is_triggered_only = yes
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+	immediate = {
+		hidden_effect = {
+			add_country_modifier = {
+				name = cooldown_eclipse_conspiracy
+				duration = 1825
+				hidden = yes	
+			}
+			if = {
+				limit = { ai = yes }
+				every_owned_province = {
+					limit = { has_province_modifier = recent_uprising }
+					remove_province_modifier = recent_uprising
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = "eclipse_great_power.EVTOPTA4"			#Arrest and execute those we cannot trust
+		kill_advisor = random
+		add_estate_loyalty = {
+            estate = all
+            loyalty = -20
+            short = yes
+        }
+		if = {
+			limit = {
+				NOT = {
+					estate_loyalty = {
+						estate = all
+						loyalty = 30
+					}
+				}
+				estate_influence = {
+					estate = all
+					influence = 1
+				}				
+			}
+			spawn_rebels_seize_land_switch = yes
+		}
+	}
+	option = {
+		name = "eclipse_great_power.EVTOPTB4"			#Surely these are malign rumors...
+		random = {
+			chance = 90
+
+			kill_ruler = yes
+			give_estate_land_share_gigantic = { estate = all }
+		}
+	}
+}
+country_event = {
+	id = eclipse_great_power.5
+	
+	title = "eclipse_great_power.EVTNAME5"				#corrupt
+	desc = "eclipse_great_power.EVTDESC5"
+	
+	picture = PICTUREECLIPSE
+	
+	trigger = {
+		NOT = { has_country_modifier = cooldown_eclipse_corrupt }
+		corruption = 2
+	}
+	
+	is_triggered_only = yes
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+	immediate = {
+		hidden_effect = {
+			add_country_modifier = {
+				name = cooldown_eclipse_corrupt
+				duration = 1825
+				hidden = yes	
+			}
+			if = {
+				limit = { ai = yes }
+				every_owned_province = {
+					limit = { has_province_modifier = recent_uprising }
+					remove_province_modifier = recent_uprising
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = "eclipse_great_power.EVTOPTA5"			#As long as I get my share, I do not care
+		ai_chance = { factor = 95 }
+		add_corruption = 3
+		if = {
+			limit = {
+				corruption = 10				
+			}
+			random_owned_province = {
+				limit = { is_capital = no }
+				spawn_rebels = {
+					size = 3
+					type = anti_tax_rebels
+				}
+			}
+		}
+	}
+	option = {
+		name = "eclipse_great_power.EVTOPTB5"			#We have to do something
+		ai_chance = { factor = 5 }
+		add_adm_power = -100
+		if = {
+			limit = {
+				corruption = 10				
+			}
+			kill_advisor = random
+			add_estate_loyalty = {
+				estate = all
+				loyalty = -10
+				short = yes
+			}
+		}
+	}
+}
+country_event = {
+	id = eclipse_great_power.6
+	
+	title = "eclipse_great_power.EVTNAME6"				#army deserting
+	desc = "eclipse_great_power.EVTDESC6"
+	
+	picture = PICTUREECLIPSE
+	
+	trigger = {
+		NOT = { has_country_modifier = cooldown_eclipse_dismorale }
+		NOT = { has_country_modifier = cooldown_eclipse_deserters }
+		NOT = { has_country_modifier = cooldown_eclipse_leadersexecuted }
+		NOT = { has_country_modifier = cooldown_eclipse_army }
+	}
+	
+	is_triggered_only = yes
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+	immediate = {
+		hidden_effect = {
+			add_country_modifier = {
+				name = cooldown_eclipse_army
+				duration = 1825
+				hidden = yes	
+			}
+			random_known_country = {
+				limit = {
+					is_rival = ROOT
+				}
+				save_event_target_as = eclipse_rival_country
+			}
+			if = {
+				limit = { ai = yes }
+				every_owned_province = {
+					limit = { has_province_modifier = recent_uprising }
+					remove_province_modifier = recent_uprising
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = "eclipse_great_power.EVTOPTA6"			#force them to stay
+		ai_chance = { factor = 5 }
+		add_mil_power = -70
+		add_country_modifier = {
+			name = cooldown_eclipse_dismorale
+			duration = 1825	
+		}
+	}
+	option = {
+		name = "eclipse_great_power.EVTOPTB6"			#bah! we dont need them
+		ai_chance = { factor = 5 }
+		add_yearly_manpower = -1.5
+		add_country_modifier = {
+			name = cooldown_eclipse_deserters
+			duration = 1825	
+		}
+		event_target:eclipse_rival_country = {
+			add_yearly_manpower = 0.5
+		}
+	}
+	option = {
+		name = "eclipse_great_power.EVTOPTC6"			#outrageous! heads will roll
+		ai_chance = { factor = 90 }
+		kill_leader = {
+			type = general
+		}
+		add_army_professionalism = -0.10
+		add_army_tradition = -20
+		add_country_modifier = {
+			name = cooldown_eclipse_leadersexecuted
+			duration = 1825	
+		}
+	}
+}
+country_event = {
+	id = eclipse_great_power.7
+	
+	title = "eclipse_great_power.EVTNAME7"				#spies
+	desc = "eclipse_great_power.EVTDESC7"
+	
+	picture = PICTUREECLIPSE
+	
+	trigger = {
+		NOT = { has_country_modifier = cooldown_eclipse_spies }
+	}
+	
+	is_triggered_only = yes
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+	immediate = {
+		hidden_effect = {
+			add_country_modifier = {
+				name = cooldown_eclipse_spies
+				duration = 1825
+				hidden = yes	
+			}
+			random_known_country = {
+				limit = {
+					is_rival = ROOT
+				}
+				save_event_target_as = eclipse_spy_country
+			}
+			if = {
+				limit = { ai = yes }
+				every_owned_province = {
+					limit = { has_province_modifier = recent_uprising }
+					remove_province_modifier = recent_uprising
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = "eclipse_great_power.EVTOPTA7"				#clasp in irons
+		ai_chance = { factor = 5 }
+		add_country_modifier = {
+			name = eclipse_spy_hunts
+			duration = 1825	
+		}
+		event_target:eclipse_spy_country = {
+			add_spy_network_in = {
+				who = ROOT
+				value = 50
+			}
+		}
+	}
+	option = {
+		name = "eclipse_great_power.EVTOPTB7"				#careufl
+		ai_chance = { factor = 95 }
+		add_country_modifier = {
+			name = eclipse_spies_rampart
+			duration = 1825	
+		}
+		event_target:eclipse_spy_country = {
+			add_spy_network_in = {
+				who = ROOT
+				value = 100
+			}
+		}
+	}
+}
+country_event = {
+	id = eclipse_great_power.8
+	
+	title = "eclipse_great_power.EVTNAME8"				#loss of allies
+	desc = "eclipse_great_power.EVTDESC8"
+	
+	picture = PICTUREECLIPSE
+	
+	trigger = {
+		NOT = { has_country_modifier = cooldown_eclipse_ally }
+		any_known_country = {
+			alliance_with = ROOT
+		}
+	}
+	
+	is_triggered_only = yes
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+	immediate = {
+		hidden_effect = {
+			add_country_modifier = {
+				name = cooldown_eclipse_ally
+				duration = 1825
+				hidden = yes	
+			}
+			random_known_country = {
+				limit = {
+					alliance_with = ROOT
+				}
+				save_event_target_as = eclipse_ally_country
+			}
+			if = {
+				limit = { ai = yes }
+				every_owned_province = {
+					limit = { has_province_modifier = recent_uprising }
+					remove_province_modifier = recent_uprising
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = "eclipse_great_power.EVTOPTA8"				#let them think what they want
+		event_target:eclipse_ally_country = {
+			add_opinion = {
+				who = ROOT
+				modifier = stronger_alone  
+			}
+		}
+		add_country_modifier = {
+			name = eclipse_failed_state
+			duration = 1825	
+		}
+	}
+	option = {
+		name = "eclipse_great_power.EVTOPTB8"				#attempt to keep our allies
+		add_dip_power = -100
+		add_country_modifier = {
+			name = eclipse_maintaining_of_world_stage
+			duration = 1825	
+		}
+	}
+}
+country_event = {
+	id = eclipse_great_power.9
+	
+	title = "eclipse_great_power.EVTNAME9"					#City conflicts
+	desc = "eclipse_great_power.EVTDESC9"
+	
+	picture = PICTUREECLIPSE
+	
+	trigger = {
+		NOT = { has_country_modifier = cooldown_eclipse_cityconflict }
+		any_owned_province = {
+			is_capital = no
+			base_manpower = 3
+		}
+	}
+	
+	is_triggered_only = yes
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+	immediate = {
+		hidden_effect = {
+			add_country_modifier = {
+				name = cooldown_eclipse_cityconflict
+				duration = 1025
+				hidden = yes
+			}
+			random_owned_province = {
+				limit = {
+					is_capital = no
+					base_manpower = 3
+				}
+				save_event_target_as = eclipse_cityconflict_province
+			}
+			if = {
+				limit = { ai = yes }
+				every_owned_province = {
+					limit = { has_province_modifier = recent_uprising }
+					remove_province_modifier = recent_uprising
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = "eclipse_great_power.EVTOPTA9"				#let them fight it out
+		ai_chance = { factor = 5 }
+		event_target:eclipse_cityconflict_province = {
+			add_local_autonomy = 25
+			add_devastation = 1
+			random_list = {
+				30 = {
+					add_base_manpower = -1
+				}
+				70= {
+					add_base_manpower = -1
+					spawn_rebels = {
+						size = 1
+						type = anti_tax_rebels
+					}
+				}
+			}
+		}
+	}
+	option = {
+		name = "eclipse_great_power.EVTOPTB9"				#restore order
+		ai_chance = { factor = 95 }
+		add_mil_power = -70
+		event_target:eclipse_cityconflict_province = {
+			add_devastation = 1
+			spawn_rebels = {
+				size = 1
+				type = anti_tax_rebels
+			}
+		}
+	}
+}
+country_event = {
+	id = eclipse_great_power.10
+	
+	title = "eclipse_great_power.EVTNAME10"					#we are weak
+	desc = "eclipse_great_power.EVTDESC10"
+	
+	picture = PICTUREECLIPSE
+	
+	major = yes
+	
+	trigger = {
+		NOT = { has_country_modifier = cooldown_eclipse_nolongerpower }
+		is_great_power = no
+	}
+	
+	is_triggered_only = yes
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+	immediate = {
+		hidden_effect = {
+			add_country_modifier = {
+				name = cooldown_eclipse_nolongerpower
+				duration = -1
+				hidden = yes
+			}
+			random_known_country = {
+				limit = {
+					is_rival = ROOT
+					NOT = { is_neighbor_of = ROOT }
+				}
+				save_event_target_as = eclipse_rivalsubjugator_country
+			}
+			if = {
+				limit = { ai = yes }
+				every_owned_province = {
+					limit = { has_province_modifier = recent_uprising }
+					remove_province_modifier = recent_uprising
+				}
+			}
+			if = {
+				any_known_country = {
+					is_rival = ROOT
+					is_neighbor_of = ROOT
+				}
+				random_known_country = {
+					limit = {
+						is_rival = ROOT
+						is_neighbor_of = ROOT
+					}
+					save_event_target_as = eclipse_nosubjugateorsubjugator_country
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = "eclipse_great_power.EVTOPTA10"				#Curses!
+		add_prestige = -100
+		event_target:eclipse_rivalsubjugator_country = {
+			add_casus_belli = {
+				target = ROOT
+				type = cb_vassalize_mission
+				months = 120
+			}
+		}
+		if = {
+			any_known_country = {
+				total_development = ROOT
+				NOT = { is_rival = ROOT }
+				is_neighbor_of = ROOT
+			}
+			event_target:eclipse_nosubjugateorsubjugator_country = {
+				add_casus_belli = {
+					target = ROOT
+					type = cb_vassalize_mission
+					months = 120
+				}
+			}
+		}
+	}
+}
+country_event = {
+	id = eclipse_great_power.14
+	
+	title = "eclipse_great_power.EVTNAME14"					#subjects
+	desc = "eclipse_great_power.EVTDESC14"
+	
+	picture = PICTUREECLIPSE
+	
+	major = yes
+	
+	trigger = {
+		NOT = { has_country_modifier = eclipse_subject_loyalty }
+		NOT = { has_country_modifier = happen_once_subjects_eclipse }				#once
+		any_known_country = {
+			is_subject_of = ROOT
+		}
+	}
+	
+	is_triggered_only = yes
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+	immediate = {
+		hidden_effect = {
+			random_known_country = {
+				limit = {
+					is_subject_of = ROOT
+				}
+				save_event_target_as = eclipse_independence_country
+			}
+			add_country_modifier = {
+				name = happen_once_subjects_eclipse
+				duration = -1
+				hidden = yes
+			}
+		}
+	}
+	
+	option = {
+		name = "eclipse_great_power.EVTOPTA14"				#we will hold on to them
+		ai_chance = { factor = 0 }
+		every_subject_country = {
+			remove_historical_friend = ROOT
+			add_historical_rival = ROOT
+		}
+		add_country_modifier = {
+			name = eclipse_subject_loyalty
+			duration = 3650
+		}
+	}
+	option = {
+		name = "eclipse_great_power.EVTOPTB14"				#take as much sovereignity as you want
+		ai_chance = { factor = 100 }
+		every_subject_country = {
+			remove_historical_friend = ROOT
+			add_historical_rival = ROOT
+		}
+		release_all_subjects = yes
+	}
+	option = {
+		name = "eclipse_great_power.EVTOPTC14"				#perhhaps we can do something
+		ai_chance = { factor = 0 }
+		highlight = yes
+		trigger = {
+			OR = {
+				ruler_has_personality_ancestor = { key = charismatic_negotiator }
+				ruler_has_personality_ancestor = { key = silver_tongue }
+			}
+		}
+		add_dip_power = -100
+		event_target:eclipse_independence_country = {
+			grant_independence = yes
+		}
+		add_casus_belli = {
+			target = event_target:eclipse_independence_country
+			type = cb_vassalize_mission
+			months = 36
+		}
+	}
+}
+country_event = {
+	id = eclipse_great_power.15
+	
+	title = "eclipse_great_power.EVTNAME15"				#extremist
+	desc = "eclipse_great_power.EVTDESC15"
+	
+	picture = PICTUREECLIPSE
+	
+	major = yes
+	
+	trigger = {
+		NOT = { has_country_modifier = cooldown_eclipse_extremism }
+		religion_group = muslim
+	}
+	
+	is_triggered_only = yes
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+	immediate = {
+		hidden_effect = {
+			add_country_modifier = {
+				name = cooldown_eclipse_extremism
+				duration = -1
+				hidden = yes	
+			}
+			random_owned_province = {
+				limit = {
+					religion = ROOT
+					is_capital = no
+				}
+				save_event_target_as = eclipse_extremist_province
+			}
+			random_known_country = {
+				limit = {
+					is_rival = ROOT
+				}
+				save_event_target_as = eclipse_extremistrival_country
+			}
+		}
+	}
+	
+	option = {
+		name = "eclipse_great_power.EVTOPTA15"			#weed out
+		ai_chance = { factor = 35 }
+		add_piety = 0.1
+		add_mil_power = -100
+		add_stability = -1
+		add_country_modifier = {
+			name = eclipse_islamic_extremism
+			duration = 3650
+		}
+		event_target:eclipse_extremist_province = {
+			add_province_modifier = {
+				name = "prov_eclipse_extremist_stronghold"
+				duration = 3650
+			}
+			spawn_rebels = {
+				size = 3
+				type = religious_rebels
+			}
+		}
+	}
+	option = {
+		name = "eclipse_great_power.EVTOPTB15"			#ignore
+		ai_chance = { factor = 65 }
+		add_stability = -2
+		add_piety = -0.2
+		add_country_modifier = {
+			name = eclipse_islamic_extremism_severe
+			duration = 7300
+		}
+		event_target:eclipse_extremist_province = {
+			add_local_autonomy = 50
+			add_province_modifier = {
+				name = "prov_eclipse_extremist_stronghold"
+				duration = 7300
+			}
+		}
+		every_neighbor_country = {
+			add_opinion = {
+				who = ROOT
+				modifier = opinion_religious_tension
+			}
+		}
+	}
+}
+country_event = {
+	id = eclipse_great_power.16
+	
+	title = "eclipse_great_power.EVTNAME16"				#advisors flee
+	desc = "eclipse_great_power.EVTDESC16"
+	
+	picture = PICTUREECLIPSE
+	
+	trigger = {
+		NOT = { has_country_modifier = cooldown_eclipse_aetet }
+		OR = {
+			employed_advisor = {
+				category = ADM
+			}
+			employed_advisor = {
+				category = DIP
+			}
+			employed_advisor = {
+				category = MIL
+			}
+		}
+	}
+	
+	is_triggered_only = yes
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+	immediate = {
+		hidden_effect = {
+			add_country_modifier = {
+				name = cooldown_eclipse_aetet
+				duration = 3650
+				hidden = yes	
+			}
+		}
+	}
+	
+	option = {
+		name = "eclipse_great_power.EVTOPTA16"			#a
+		ai_chance = { factor = 95 }
+		remove_advisor_by_category = ADM
+		add_adm_power = -60
+		remove_advisor_by_category = DIP
+		add_dip_power = -60
+		remove_advisor_by_category = MIL
+		add_mil_power = -60
+	}
+	option = {
+		name = "eclipse_great_power.EVTOPTB16"			#convince them to stay
+		ai_chance = { factor = 5 }
+		add_years_of_income = -0.5
+	}
+}
+country_event = {
+	id = eclipse_great_power.17
+	
+	title = "eclipse_great_power.EVTNAME17"				#too many loans
+	desc = "eclipse_great_power.EVTDESC17"
+	
+	picture = PICTUREECLIPSE
+	
+	trigger = {
+		NOT = { has_country_modifier = cooldown_eclipse_loans }
+		num_of_loans = 5
+		is_at_war = yes
+	}
+	
+	is_triggered_only = yes
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+	immediate = {
+		hidden_effect = {
+			add_country_modifier = {
+				name = cooldown_eclipse_loans
+				duration = -1
+				hidden = yes	
+			}
+			random_known_country = {
+				limit = {
+					OR = {
+						defensive_war_with = ROOT
+						offensive_war_with = ROOT
+					}
+				}
+				save_event_target_as = eclipse_loanfight_country
+			}
+		}
+	}
+	
+	option = {
+		name = "eclipse_great_power.EVTOPTA17"			#worrisome
+		event_target:eclipse_loanfight_country = {
+			add_years_of_income = 0.5
+			add_yearly_manpower = 0.5
+			add_country_modifier = {
+				name = eclipse_loan_offers
+				duration = 3650
+			}
+		}
+	}
+}
+country_event = {
+	id = eclipse_great_power.18
+	
+	title = "eclipse_great_power.EVTNAME18"				#tolerance
+	desc = "eclipse_great_power.EVTDESC18"
+	
+	picture = PICTUREECLIPSE
+	
+	trigger = {
+		NOT = { has_country_modifier = cooldown_eclipse_tolerance_once }
+		OR = {
+			full_idea_group = humanist_ideas
+			has_idea = tolerance_idea
+		}
+	}
+	
+	is_triggered_only = yes
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+	immediate = {
+		hidden_effect = {
+			add_country_modifier = {
+				name = cooldown_eclipse_tolerance_once
+				duration = -1
+				hidden = yes	
+			}
+		}
+	}
+	
+	option = {
+		name = "eclipse_great_power.EVTOPTA18"			#a
+		remove_idea_group = humanist_ideas
+	}
+	option = {
+		name = "eclipse_great_power.EVTOPTB18"			#a
+		add_country_modifier = {
+			name = eclipse_maintenance_tolerance
+			duration = 3650
+		}
+	}
+}

@@ -1,0 +1,114 @@
+prov_eclipse_religious = {
+	local_missionary_strength = -0.05
+	local_unrest = 10
+	local_governing_cost = 0.25
+	picture = "eclipse_modifier"
+}
+prov_eclipse_cultural = {
+	local_culture_conversion_cost = 2.00
+	local_unrest = 10
+	local_governing_cost = 0.25
+	picture = "eclipse_modifier"
+}
+prov_eclipse_trade = {
+	papal_influence = 0.5
+	picture = "eclipse_modifier"
+}
+prov_eclipse_production = {
+	local_development_cost = 0.5
+	local_production_efficiency = -0.25
+	local_governing_cost = 0.25
+	picture = "eclipse_modifier"
+}
+prov_eclipse_extremist_stronghold = {
+	local_unrest = 10
+	statewide_governing_cost = 0.50
+	local_missionary_strength = -0.05
+	picture = "eclipse_modifier"
+}
+eclipse_maintenance_tolerance = {
+	country_admin_power = -2
+}
+eclipse_main = {
+	colonists = 1
+}
+eclipse_subject_loyalty = {
+	liberty_desire = 50
+	vassal_income = -0.80
+	vassal_forcelimit_bonus = -0.80
+}
+eclipse_islamic_extremism = {
+	missionaries = -1
+	country_military_power = -1
+}
+eclipse_islamic_extremism_severe = {
+	tolerance_own = -2
+	religious_unity = -0.33
+	dhimmi_loyalty_modifier = -0.2
+}
+eclipse_loan_offers = {
+	loot_amount = 1.00
+	land_maintenance_modifier = -0.33
+	mercenary_cost = -0.33
+}
+cooldown_eclipse_tolerance_once = {
+}
+cooldown_eclipse_extremism = {
+}
+cooldown_eclipse_loans = {
+}
+cooldown_eclipse_aetet = {
+}
+happen_once_subjects_eclipse = {
+}
+cooldown_eclipse_religious = {
+}
+cooldown_eclipse_cultural = {
+}
+cooldown_eclipse_conspiracy = {
+}
+cooldown_eclipse_corrupt = {
+}
+cooldown_eclipse_spies = {
+}
+cooldown_eclipse_ally = {
+}
+cooldown_eclipse_cityconflict = {
+}
+cooldown_eclipse_nolongerpower = {
+}
+cooldown_eclipse_dismorale = {
+	land_morale = -0.20
+}
+cooldown_eclipse_deserters = {
+	global_manpower_modifier = -0.50
+	manpower_recovery_speed = -0.33
+}
+cooldown_eclipse_leadersexecuted = {
+	discipline = -0.05
+	free_leader_pool = -2
+}
+cooldown_eclipse_army = {}
+eclipse_spy_hunts = {
+	advisor_pool = -2
+	all_estate_loyalty_equilibrium = -0.1
+}
+eclipse_spies_rampart = {
+	global_spy_defence = -0.75
+}
+eclipse_failed_state = {
+	diplomatic_reputation = -3
+	prestige = -1.0
+}
+eclipse_maintaining_of_world_stage = {
+	country_diplomatic_power = -2
+}
+eclipse_luckynotsolucky = {
+	discipline = -0.10
+	stability_cost_modifier = 0.5
+	all_power_cost = 0.2
+}
+eclipse_countdown = {
+}
+eclipse_next_time ={
+}
