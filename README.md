@@ -1,6 +1,6 @@
 # 说明
 
-![Steam Update Date](https://img.shields.io/steam/update-date/2839073055?color=blue&logo=steam)![Steam Subscriptions](https://img.shields.io/steam/subscriptions/2839073055?logo=steam)
+![Steam Update Date](https://img.shields.io/steam/update-date/2839073055?color=blue&logo=steam)  ![Steam Subscriptions](https://img.shields.io/steam/subscriptions/2839073055?logo=steam)
 
 本mod为由MegaMU制作的Disaster:Eclipse of Empires汉化修改版，此mod的原作者为Plati
 
