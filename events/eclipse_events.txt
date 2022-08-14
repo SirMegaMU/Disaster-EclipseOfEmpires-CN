@@ -121,25 +121,14 @@ country_event = {
 	hidden = yes		#debug
 	
 	trigger = {
-		OR = {
-			is_great_power = yes
-			government_rank = 3
-		}
-		# NOT = { has_country_flag = had_eclipse_great_power }
+		is_great_power = yes
+		NOT = { has_country_flag = had_eclipse_great_power }
 		NOT = { has_country_flag = eclipse_countdown }
-		NOT = { has_country_flag = eclipse_next_time }
 	}
 	
 	immediate = {
 		hidden_effect = {
-			if = {
-				limit = { has_country_flag = had_eclipse_great_power }
-				set_country_flag = eclipse_next_time
-			}
-			if = {
-				limit = { NOT = { has_country_flag = had_eclipse_great_power } }
-				set_country_flag = eclipse_countdown
-			}
+			set_country_flag = eclipse_countdown
 		}
 	}
 	
@@ -162,21 +151,14 @@ country_event = {
 	hidden = yes		#debug
 	
 	trigger = {
-		AND = {
-			is_great_power = no
-			NOT = { government_rank = 3 }
-		}
+		is_great_power = no
 		NOT = { has_country_flag = had_eclipse_great_power }
-		OR = {
-			has_country_flag = eclipse_countdown
-			had_country_flag = eclipse_next_time
-		}
+		has_country_flag = eclipse_countdown
 	}
 	
 	immediate = {
 		hidden_effect = {
 			clr_country_flag = eclipse_countdown
-			clr_country_flag = eclipse_next_time
 		}
 	}
 	
