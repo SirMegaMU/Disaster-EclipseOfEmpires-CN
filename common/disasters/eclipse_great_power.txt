@@ -1,7 +1,7 @@
 eclipse_great_powerd = {
 	potential = {
-		# NOT = { has_country_flag = had_eclipse_great_power }
-		total_development = 250
+		NOT = { has_country_flag = had_eclipse_great_power }
+		# total_development = 250
 	}
 
 	can_start = {
